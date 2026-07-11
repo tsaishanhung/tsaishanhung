@@ -169,7 +169,7 @@ nav.on-light .nav-links a { color: var(--black); }
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: transparent;
+  background: var(--black);
   overflow: hidden;
   pointer-events: none;
   transition: opacity 0.5s ease;
@@ -183,7 +183,7 @@ nav.on-light .nav-links a { color: var(--black); }
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
   color: var(--white);
-  font-size: clamp(3.2rem, 11vw, 9rem);
+  font-size: clamp(10rem, 34vw, 30rem);
   line-height: 1;
   opacity: 0;
   will-change: transform, opacity, left, top;
@@ -293,12 +293,18 @@ nav.on-light .nav-links a { color: var(--black); }
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--black);
-  padding: 0 2rem;
+  padding: 0;
+  margin-right: 1.4rem;
+  display: inline-flex;
+  align-items: center;
 }
 .ticker-item::after {
-  content: '◆';
-  margin-left: 2rem;
-  font-size: 0.5rem;
+  content: '✸';
+  margin-left: 1.4rem;
+  font-size: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  transform: translateY(-0.03em);
 }
 @keyframes ticker {
   0% { transform: translateX(0); }
@@ -317,6 +323,16 @@ nav.on-light .nav-links a { color: var(--black); }
   border-right: 1px solid var(--border);
   display: flex;
   align-items: flex-start;
+  position: relative;
+}
+.intro-label::before {
+  content: '';
+  position: absolute;
+  top: 3.2rem;
+  left: 2.4rem;
+  width: 3px;
+  height: 1.6rem;
+  background: var(--lime);
 }
 .intro-label span {
   font-family: 'Space Grotesk', sans-serif;
@@ -361,6 +377,17 @@ nav.on-light .nav-links a { color: var(--black); }
   letter-spacing: -0.03em;
   text-transform: none;
   color: var(--black);
+  position: relative;
+  padding-left: 1.1rem;
+}
+.section-tag::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 3px;
+  background: var(--lime);
 }
 
 .services-grid {
@@ -652,7 +679,7 @@ footer p {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  #name-intro-overlay .letter { font-size: clamp(2.4rem, 13vw, 5rem); }
+  #name-intro-overlay .letter { font-size: clamp(16rem, 85vw, 34rem); }
   nav { padding: 1rem 1.2rem; }
 
   /* Hero: 左文右圖並排，一個螢幕高度 */
@@ -899,7 +926,7 @@ footer p {
 <!-- SERVICES -->
 <div class="services" id="services">
   <div class="services-header fade-in">
-    <span class="section-tag">Services · 服務項目</span>
+    <span class="section-tag">What I Do · 服務範疇</span>
   </div>
   <div class="services-grid fade-in">
     <div class="service-card">
@@ -1168,11 +1195,9 @@ const words = [
   { text: 'HUNG', lime: true },
 ];
 
-// 建立字母元素並隨機散落，堆疊範圍限制在 hero（照片＋姓名）區塊底部之內
-const heroSection = document.querySelector('.hero');
-const heroRect = heroSection.getBoundingClientRect();
-const pileBottom = heroRect.bottom - 12; // 貼近 hero 區塊底部，留一點邊距
-const pileTop = heroRect.bottom * 0.62;  // 堆疊帶的上緣，避免蓋住太多版面
+// 建立字母元素並隨機散落，堆疊範圍佈滿整個螢幕
+const pileBottom = window.innerHeight - 20;
+const pileTop = window.innerHeight * 0.12;
 const letterEls = [];
 let li = 0;
 words.forEach(w => {
@@ -1180,7 +1205,7 @@ words.forEach(w => {
     const span = document.createElement('span');
     span.className = 'letter' + (w.lime ? ' lime' : '');
     span.textContent = ch;
-    const randX = 8 + Math.random() * 84; // vw %
+    const randX = 6 + Math.random() * 88; // vw %
     const randY = pileTop + Math.random() * (pileBottom - pileTop);
     const randRotate = (Math.random() - 0.5) * 70; // -35~35deg 雜亂角度
     // 起始位置：畫面最上方外，往下掉落
@@ -1278,11 +1303,29 @@ function dismissIntro() {
     compactName.classList.add('visible');
     introOverlay.classList.add('fade-out');
   }, 950);
-  setTimeout(() => { introOverlay.style.display = 'none'; }, 1500);
+  setTimeout(() => {
+    introOverlay.style.display = 'none';
+    unlockScroll();
+  }, 1500);
 }
-// 全部字母落定後，等待使用者滾動觸發歸位
+// 全部字母落定後，鎖住頁面捲動，等待使用者手勢觸發歸位（避免捲動手勢直接把頁面帶到很下面）
+function lockScroll() {
+  document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
+}
+function unlockScroll() {
+  document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
+}
 setTimeout(() => {
-  window.addEventListener('scroll', dismissIntro, { once: true, passive: true });
+  lockScroll();
+  const triggerDismiss = (e) => {
+    window.removeEventListener('wheel', triggerDismiss);
+    window.removeEventListener('touchmove', triggerDismiss);
+    dismissIntro();
+  };
+  window.addEventListener('wheel', triggerDismiss, { passive: true });
+  window.addEventListener('touchmove', triggerDismiss, { passive: true });
   setTimeout(dismissIntro, 5000);
 }, nameDropDuration);
 
