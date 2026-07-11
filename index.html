@@ -151,10 +151,49 @@ nav.on-light .nav-links a { color: var(--black); }
   letter-spacing: -0.03em;
   color: var(--white);
   margin-bottom: 2.4rem;
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
+.hero-name.visible { opacity: 1; }
 
 .hero-name span {
   display: block;
+  color: var(--lime);
+}
+.hero-name .lime-row {
+  color: var(--lime);
+}
+
+/* ── 進場巨型字母掉落層 ── */
+#name-intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+#name-intro-overlay.fade-out {
+  opacity: 0;
+}
+#name-intro-overlay .letter {
+  position: absolute;
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  color: var(--white);
+  font-size: clamp(3.2rem, 11vw, 9rem);
+  line-height: 1;
+  opacity: 0;
+  will-change: transform, opacity, left, top;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition: left 0.9s cubic-bezier(0.65, 0, 0.35, 1),
+              top 0.9s cubic-bezier(0.65, 0, 0.35, 1),
+              transform 0.9s cubic-bezier(0.65, 0, 0.35, 1),
+              opacity 0.4s ease;
+}
+#name-intro-overlay .letter.lime {
   color: var(--lime);
 }
 .hero-name-zh {
@@ -204,8 +243,6 @@ nav.on-light .nav-links a { color: var(--black); }
   object-fit: cover;
   object-position: center 15%;
   display: block;
-  filter: contrast(1.05);
-  opacity: 0.85;
 }
 
 .hero-right::before {
@@ -615,6 +652,7 @@ footer p {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+  #name-intro-overlay .letter { font-size: clamp(2.4rem, 13vw, 5rem); }
   nav { padding: 1rem 1.2rem; }
 
   /* Hero: 左文右圖並排，一個螢幕高度 */
@@ -756,7 +794,6 @@ footer p {
 
 /* ── ② Hero 文字逐行滑入 ── */
 .hero-tag,
-.hero-name,
 .hero-name-zh,
 .hero-desc,
 .hero-cta {
@@ -765,7 +802,6 @@ footer p {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .hero-tag.visible { opacity: 1; transform: translateY(0); }
-.hero-name.visible { opacity: 1; transform: translateY(0); }
 .hero-name-zh.visible { opacity: 1; transform: translateY(0); }
 .hero-desc.visible { opacity: 1; transform: translateY(0); }
 .hero-cta.visible { opacity: 1; transform: translateY(0); }
@@ -799,6 +835,7 @@ footer p {
 </style>
 </head>
 <body>
+<div id="name-intro-overlay"></div>
 
 <!-- NAV -->
 <nav>
@@ -814,8 +851,8 @@ footer p {
 <section class="hero">
   <div class="hero-left">
     <p class="hero-tag">Freelance Editor &amp; Writer · Taiwan</p>
-    <h1 class="hero-name">
-      TSAI<br>SHAN<br><span>HUNG</span>
+    <h1 class="hero-name" id="hero-name-compact">
+      TSAI<br>SHAN<br><span class="lime-row">HUNG</span>
     </h1>
     <p class="hero-name-zh">洪采姍</p>
     <p class="hero-desc" style="margin-top:0;">深耕媒體內容產業逾八年，專注於人物專訪、品牌敘事與文字編輯。</p>
@@ -1123,18 +1160,145 @@ function updateNav() {
 updateNav();
 window.addEventListener('scroll', updateNav);
 
-// ── ② Hero 文字依序滑入 ──
+// ── ② Hero 名字：巨型字母雜亂堆疊進場，滾動後歸位 ──
+const introOverlay = document.getElementById('name-intro-overlay');
+const words = [
+  { text: 'TSAI', lime: false },
+  { text: 'SHAN', lime: false },
+  { text: 'HUNG', lime: true },
+];
+
+// 建立字母元素並隨機散落，堆疊範圍限制在 hero（照片＋姓名）區塊底部之內
+const heroSection = document.querySelector('.hero');
+const heroRect = heroSection.getBoundingClientRect();
+const pileBottom = heroRect.bottom - 12; // 貼近 hero 區塊底部，留一點邊距
+const pileTop = heroRect.bottom * 0.62;  // 堆疊帶的上緣，避免蓋住太多版面
+const letterEls = [];
+let li = 0;
+words.forEach(w => {
+  w.text.split('').forEach(ch => {
+    const span = document.createElement('span');
+    span.className = 'letter' + (w.lime ? ' lime' : '');
+    span.textContent = ch;
+    const randX = 8 + Math.random() * 84; // vw %
+    const randY = pileTop + Math.random() * (pileBottom - pileTop);
+    const randRotate = (Math.random() - 0.5) * 70; // -35~35deg 雜亂角度
+    // 起始位置：畫面最上方外，往下掉落
+    span.style.left = randX + 'vw';
+    span.style.top = '-10vh';
+    span.style.transform = `translate(-50%, -50%) rotate(${randRotate}deg)`;
+    span.style.transition = 'none';
+    span.dataset.finalX = randX;
+    span.dataset.finalY = randY;
+    span.dataset.finalRotate = randRotate;
+    introOverlay.appendChild(span);
+    letterEls.push(span);
+    li++;
+  });
+});
+
+// 依序從畫面最上方掉落到堆疊位置（無彈跳，單純落下）
+letterEls.forEach((el, i) => {
+  setTimeout(() => {
+    el.style.opacity = '1';
+    el.style.transition = 'top 0.55s cubic-bezier(0.5,0,0.75,0.9), opacity 0.25s ease';
+    el.style.top = el.dataset.finalY + 'px';
+  }, i * 65);
+});
+const nameDropDuration = letterEls.length * 65 + 650;
+
+// 計算目標位置：對應真正 hero-name 文字中每個字母應在的位置
+function computeFinalPositions() {
+  const compactName = document.getElementById('hero-name-compact');
+  const rect = compactName.getBoundingClientRect();
+  // 用隱藏量尺量測每行文字，取得每個字母中心點
+  const measureLine = (text, lineTopRatio) => {
+    const temp = document.createElement('span');
+    temp.style.visibility = 'hidden';
+    temp.style.position = 'fixed';
+    temp.style.fontFamily = "'Space Grotesk', sans-serif";
+    temp.style.fontWeight = '700';
+    temp.style.fontSize = getComputedStyle(compactName).fontSize;
+    temp.style.letterSpacing = getComputedStyle(compactName).letterSpacing;
+    document.body.appendChild(temp);
+    const positions = [];
+    let acc = '';
+    for (const ch of text) {
+      temp.textContent = acc;
+      const startW = temp.getBoundingClientRect().width;
+      temp.textContent = acc + ch;
+      const endW = temp.getBoundingClientRect().width;
+      positions.push({ left: (startW + endW) / 2 });
+      acc += ch;
+    }
+    temp.textContent = acc;
+    const totalW = temp.getBoundingClientRect().width;
+    document.body.removeChild(temp);
+    return { positions, totalW };
+  };
+
+  const lineHeight = rect.height / 3;
+  const lines = [
+    { text: 'TSAI', top: rect.top + lineHeight * 0.5 },
+    { text: 'SHAN', top: rect.top + lineHeight * 1.5 },
+    { text: 'HUNG', top: rect.top + lineHeight * 2.5 },
+  ];
+
+  let idx = 0;
+  const finals = [];
+  lines.forEach(line => {
+    const { positions, totalW } = measureLine(line.text, line.top);
+    const startX = rect.left + (rect.width - totalW) / 2;
+    positions.forEach(p => {
+      finals.push({ x: startX + p.left, y: line.top });
+      idx++;
+    });
+  });
+  return finals;
+}
+
+const compactName = document.getElementById('hero-name-compact');
+let introDismissed = false;
+function dismissIntro() {
+  if (introDismissed) return;
+  introDismissed = true;
+
+  const finals = computeFinalPositions();
+  letterEls.forEach((el, i) => {
+    const f = finals[i];
+    if (!f) return;
+    el.style.transition = 'left 0.9s cubic-bezier(0.65,0,0.35,1), top 0.9s cubic-bezier(0.65,0,0.35,1), transform 0.9s cubic-bezier(0.65,0,0.35,1), font-size 0.9s cubic-bezier(0.65,0,0.35,1), opacity 0.5s ease 0.5s';
+    el.style.left = f.x + 'px';
+    el.style.top = f.y + 'px';
+    el.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+    el.style.fontSize = getComputedStyle(compactName).fontSize;
+  });
+
+  setTimeout(() => {
+    compactName.classList.add('visible');
+    introOverlay.classList.add('fade-out');
+  }, 950);
+  setTimeout(() => { introOverlay.style.display = 'none'; }, 1500);
+}
+// 全部字母落定後，等待使用者滾動觸發歸位
+setTimeout(() => {
+  window.addEventListener('scroll', dismissIntro, { once: true, passive: true });
+  setTimeout(dismissIntro, 5000);
+}, nameDropDuration);
+
+// ── ③ Hero 其餘文字依序滑入 ──
 const heroEls = [
   { el: document.querySelector('.hero-tag'), delay: 100 },
-  { el: document.querySelector('.hero-name'), delay: 300 },
-  { el: document.querySelector('.hero-name-zh'), delay: 480 },
-  { el: document.querySelector('.hero-desc'), delay: 600 },
-  { el: document.querySelector('.hero-cta'), delay: 780 },
+  { el: document.querySelector('.hero-name-zh'), delay: nameDropDuration + 1000 },
+  { el: document.querySelector('.hero-desc'), delay: nameDropDuration + 1150 },
+  { el: document.querySelector('.hero-cta'), delay: nameDropDuration + 1300 },
 ];
 heroEls.forEach(({ el, delay }) => {
   if (!el) return;
   setTimeout(() => el.classList.add('visible'), delay);
 });
+
+
 
 // ── ③ 點觸漣漪（touch + click 都支援）──
 function spawnRipple(x, y) {
