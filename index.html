@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>洪采姍 Tsai Shan Hung｜自由文字編輯・人物專訪・品牌廣編</title>
+<title>洪采姍 Tsai Shan Hung｜自由文字編輯</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%0A%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2210%22%20fill%3D%22%23c1502c%22/%3E%0A%3Ctext%20x%3D%2232%22%20y%3D%2241%22%20font-family%3D%22Manrope%2C%20Arial%2C%20sans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2222%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%22-0.5%22%3ETSH%3C/text%3E%0A%3C/svg%3E">
 <meta name="description" content="洪采姍，深耕媒體內容產業逾八年的自由工作者，專注於人物專訪、品牌敘事與文字編輯。合作媒體包括 Shopping Design、VOGUE Taiwan、VERSE 等。">
 <meta name="keywords" content="洪采姍, Tsai Shan Hung, 自由編輯, 文字工作者, 人物專訪, 品牌廣編, 品牌文案, 文字編輯, freelance writer, freelance editor, Taiwan">
@@ -1050,18 +1050,18 @@ footer p {
       </linearGradient>
     </defs>
     <g transform="rotate(38 50 110)">
-      <!-- 筆身：圓柱體漸層製造光澤感，無外框線 -->
-      <rect x="36" y="20" width="28" height="146" rx="14" fill="url(#pen-barrel)"/>
+      <!-- 筆身：圓柱體漸層製造光澤感，纖細修長比例，無外框線 -->
+      <rect x="41" y="16" width="18" height="152" rx="9" fill="url(#pen-barrel)"/>
       <!-- 筆蓋與筆身分界細線 -->
-      <rect x="36" y="72" width="28" height="1.5" fill="rgba(0,0,0,0.4)"/>
+      <rect x="41" y="70" width="18" height="1.2" fill="rgba(0,0,0,0.4)"/>
       <!-- 極簡筆夾 -->
-      <rect x="58" y="24" width="4" height="42" rx="2" fill="url(#pen-gold)"/>
+      <rect x="57" y="20" width="2.6" height="40" rx="1.3" fill="url(#pen-gold)"/>
       <!-- 筆尖金屬環 -->
-      <rect x="37" y="158" width="26" height="10" fill="url(#pen-gold)"/>
-      <!-- 筆尖：細長俐落造型 -->
-      <path d="M40 168 L60 168 L50 204 Z" fill="url(#pen-nib)"/>
+      <rect x="42" y="160" width="16" height="9" fill="url(#pen-gold)"/>
+      <!-- 筆尖：細長略帶弧度收窄，貼近真實鋼筆尖形狀 -->
+      <path d="M43 169 C43 169 44 186 47 198 C48 203 52 203 53 198 C56 186 57 169 57 169 Z" fill="url(#pen-nib)"/>
       <!-- 筆尖中央細縫 -->
-      <line x1="50" y1="172" x2="50" y2="200" stroke="rgba(17,17,17,0.5)" stroke-width="1"/>
+      <line x1="50" y1="174" x2="50" y2="199" stroke="rgba(17,17,17,0.5)" stroke-width="0.8"/>
     </g>
   </svg>
 </div>
@@ -1533,7 +1533,7 @@ function dismissIntro() {
 
     const firstPoint = letterEls[scribblePoints[0]];
     mobilePen.style.transition = 'none';
-    mobilePen.style.left = (parseFloat(firstPoint.style.left) / 100 * window.innerWidth - 22) + 'px';
+    mobilePen.style.left = (parseFloat(firstPoint.style.left) / 100 * window.innerWidth - 20) + 'px';
     mobilePen.style.top = (parseFloat(firstPoint.dataset.finalY) - 125) + 'px';
     mobilePen.style.opacity = '0';
     void mobilePen.offsetWidth;
@@ -1546,7 +1546,7 @@ function dismissIntro() {
         const el = letterEls[letterIdx];
         const elX = parseFloat(el.style.left) / 100 * window.innerWidth;
         const elY = parseFloat(el.dataset.finalY);
-        mobilePen.style.left = (elX - 22) + 'px';
+        mobilePen.style.left = (elX - 20) + 'px';
         mobilePen.style.top = (elY - 125) + 'px';
       }, step * mobileStepMs);
     });
@@ -1610,7 +1610,7 @@ function dismissIntro() {
   // 筆從畫面外滑入，抵達第一個字母的位置
   const firstEl = letterEls[visitOrder[0]];
   pen.style.transition = 'none';
-  pen.style.left = (parseFloat(firstEl.style.left) / 100 * window.innerWidth - 22) + 'px';
+  pen.style.left = (parseFloat(firstEl.style.left) / 100 * window.innerWidth - 20) + 'px';
   pen.style.top = (parseFloat(firstEl.dataset.finalY) - 125) + 'px';
   pen.style.opacity = '0';
   void pen.offsetWidth;
@@ -1622,7 +1622,7 @@ function dismissIntro() {
       const el = letterEls[letterIdx];
       const elX = parseFloat(el.style.left) / 100 * window.innerWidth;
       const elY = parseFloat(el.dataset.finalY);
-      pen.style.left = (elX - 22) + 'px';
+      pen.style.left = (elX - 20) + 'px';
       pen.style.top = (elY - 125) + 'px';
       moveLetterHome(el);
     }, step * penStepMs);
