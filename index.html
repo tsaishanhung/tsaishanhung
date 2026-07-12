@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KM40FEPEG5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KM40FEPEG5');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>洪采姍 Tsai Shan Hung｜自由文字編輯</title>
@@ -1326,6 +1334,12 @@ function toggleCat(btn) {
   btn.classList.toggle('open');
   const list = btn.nextElementSibling;
   list.classList.toggle('open');
+  if (btn.classList.contains('open') && typeof gtag === 'function') {
+    const catName = btn.querySelector('.work-cat-zh')?.textContent || '未知分類';
+    gtag('event', 'view_work_category', {
+      category_name: catName
+    });
+  }
 }
 </script>
 
