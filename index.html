@@ -1537,10 +1537,10 @@ function dismissIntro() {
     mobilePen.style.top = (parseFloat(firstPoint.dataset.finalY) - 125) + 'px';
     mobilePen.style.opacity = '0';
     void mobilePen.offsetWidth;
-    mobilePen.style.transition = 'left 0.13s ease-out, top 0.13s ease-out, opacity 0.3s ease';
+    mobilePen.style.transition = 'left 0.2s ease-out, top 0.2s ease-out, opacity 0.3s ease';
     mobilePen.style.opacity = '1';
 
-    const mobileStepMs = 100;
+    const mobileStepMs = 155;
     scribblePoints.forEach((letterIdx, step) => {
       setTimeout(() => {
         const el = letterEls[letterIdx];
@@ -1564,7 +1564,7 @@ function dismissIntro() {
       }, fadeAt);
     });
 
-    const mobilePenDoneAt = scribblePoints.length * mobileStepMs + 150;
+    const mobilePenDoneAt = scribblePoints.length * mobileStepMs + 350;
     setTimeout(() => { mobilePen.style.opacity = '0'; }, mobilePenDoneAt);
 
     setTimeout(() => {
