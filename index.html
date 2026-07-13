@@ -1211,13 +1211,14 @@ footer p {
       <div class="work-cat-left">
         <span class="work-cat-zh">品牌廣編</span>
         <span class="work-cat-en">Advertorial</span>
-        <span class="work-cat-count">5</span>
+        <span class="work-cat-count">6</span>
       </div>
       <span class="work-cat-arrow">+</span>
     </button>
     <ul class="work-list">
-      <li><a href="https://www.shoppingdesign.com.tw/post/view/12811" target="_blank">文鼎字型 ╳ 瑜悅設計黃國瑜 Leo：深談字體選用思維，探索設計的情感線與想像力</a></li>
-      <li><a href="https://www.shoppingdesign.com.tw/post/view/12809" target="_blank">從夢境到吞噬，走進新光三越工藝之夢的慢速宇宙─陶藝創作者許匡匡、安可 ANCO 專訪</a></li>
+      <li><a href="https://www.shoppingdesign.com.tw/topic/view/69" target="_blank">第十八屆台積電書法暨篆刻大賞：從一場名為「書寫」的接力，看見書篆的流動與傳續</a></li>
+      <li><a href="https://www.shoppingdesign.com.tw/post/view/13472" target="_blank">以街頭感官為創作驅力：潮流藝術家 BOUNCE ╳ ASUS ProArt，拓展角色宇宙與多載體創作邊界</a></li>
+      <li><a href="https://www.shoppingdesign.com.tw/post/view/13200" target="_blank">2026 SKM PHOTO｜專訪日本攝影師加藤秀：在行旅之中凝視生命，以影像紀錄萬物的深層軌跡</a></li>
       <li><a href="https://www.shoppingdesign.com.tw/post/view/12774" target="_blank">設計師許向罕的靈感效率日常：換上 MAXXIS HP6 輪胎，讓創意在移動中發酵</a></li>
       <li><a href="https://www.shoppingdesign.com.tw/post/view/12754" target="_blank">走進排灣族靈媒的真實世界：屏東縣《靈媒與她們的產地》特展，看見信仰與女性的韌性力量</a></li>
       <li><a href="https://www.isuzu.com.tw/magazine/202407/" target="_blank">ISUZU 車主誌《GO!LIFE 職人好生活 Vol.4》封面故事｜鬆一點，只是喝杯咖啡</a></li>
@@ -1550,28 +1551,42 @@ function dismissIntro() {
     // 每隔一個字取一個點，讓塗鴉軌跡保有節奏感但不過於密集
     const scribblePoints = mobileVisitOrder.filter((_, i) => i % 2 === 0);
 
-    const firstPoint = letterEls[scribblePoints[0]];
     mobilePen.style.transition = 'none';
-    mobilePen.style.left = (parseFloat(firstPoint.style.left) / 100 * window.innerWidth - 20) + 'px';
-    mobilePen.style.top = (parseFloat(firstPoint.dataset.finalY) - 125) + 'px';
+    mobilePen.style.left = '0px';
+    mobilePen.style.top = '0px';
     mobilePen.style.opacity = '0';
-    void mobilePen.offsetWidth;
-    mobilePen.style.transition = 'left 0.2s ease-out, top 0.2s ease-out, opacity 0.3s ease';
-    mobilePen.style.opacity = '1';
 
     const mobileStepMs = 155;
-    scribblePoints.forEach((letterIdx, step) => {
-      setTimeout(() => {
-        const el = letterEls[letterIdx];
-        const elX = parseFloat(el.style.left) / 100 * window.innerWidth;
-        const elY = parseFloat(el.dataset.finalY);
-        mobilePen.style.left = (elX - 20) + 'px';
-        mobilePen.style.top = (elY - 125) + 'px';
-      }, step * mobileStepMs);
-    });
-
-    // 所有字母依堆疊順序平均分配在整段掃動時間內消失，即使不是筆的路徑點也會跟著消散，不留殘影
     const totalScribbleMs = scribblePoints.length * mobileStepMs;
+
+    // 組出一條平滑貝茲曲線路徑，讓筆連續滑過所有塗鴉點，而不是逐點跳轉停頓，更像真實手寫的連貫感
+    const pathPts = scribblePoints.map(idx => {
+      const el = letterEls[idx];
+      return {
+        x: parseFloat(el.style.left) / 100 * window.innerWidth - 20,
+        y: parseFloat(el.dataset.finalY) - 125
+      };
+    });
+    let pathD = `M ${pathPts[0].x} ${pathPts[0].y} `;
+    for (let i = 0; i < pathPts.length - 1; i++) {
+      const p0 = pathPts[i];
+      const p1 = pathPts[i + 1];
+      const midX = (p0.x + p1.x) / 2;
+      const midY = (p0.y + p1.y) / 2;
+      pathD += `Q ${p0.x} ${p0.y}, ${midX} ${midY} `;
+    }
+    pathD += `T ${pathPts[pathPts.length - 1].x} ${pathPts[pathPts.length - 1].y}`;
+
+    mobilePen.style.offsetPath = `path('${pathD}')`;
+    mobilePen.style.offsetRotate = '0deg';
+    mobilePen.style.offsetDistance = '0%';
+    mobilePen.style.left = '0px';
+    mobilePen.style.top = '0px';
+    void mobilePen.offsetWidth;
+    mobilePen.style.transition = `offset-distance ${totalScribbleMs}ms linear, opacity 0.3s ease`;
+    mobilePen.style.offsetDistance = '100%';
+    mobilePen.style.opacity = '1';
+
     mobileVisitOrder.forEach((letterIdx, i) => {
       const el = letterEls[letterIdx];
       const fadeAt = (totalScribbleMs / mobileVisitOrder.length) * i;
