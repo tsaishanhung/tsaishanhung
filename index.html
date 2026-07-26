@@ -10,7 +10,7 @@
   gtag('config', 'G-KM40FEPEG5');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#642c18">
+<meta name="theme-color" content="#421a0f">
 <title>洪采姍 Tsai Shan Hung｜自由文字編輯</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2210%22%20fill%3D%22%23c1502c%22%2F%3E%3Cg%20fill%3D%22%23ffffff%22%20transform%3D%22translate%288.88%2039.41%29%20scale%280.01969%20-0.01969%29%22%3E%3Cpath%20transform%3D%22translate%280%200%29%22%20d%3D%22M6%20405V504L120%20556L220%20728H350V573H582V405H350V262Q350%20204%20372.5%20180.0Q395%20156%20461%20156Q502%20156%20534.0%20162.5Q566%20169%20592%20179V10Q560%200%20511.0%20-8.5Q462%20-17%20408%20-17Q310%20-17%20246.5%2013.0Q183%2043%20151.5%2099.0Q120%20155%20120%20231V405Z%22%2F%3E%3Cpath%20transform%3D%22translate%28579%200%29%22%20d%3D%22M739%20191Q739%20122%20696.5%2075.5Q654%2029%20576.5%206.0Q499%20-17%20393%20-17Q284%20-17%20202.0%209.0Q120%2035%2073.0%2082.5Q26%20130%2023%20193H256Q262%20173%20281.0%20158.5Q300%20144%20331.0%20137.0Q362%20130%20405%20130Q459%20130%20487.5%20139.5Q516%20149%20516%20168Q516%20185%20493.5%20193.0Q471%20201%20418%20205L321%20212Q216%20219%20154.0%20242.0Q92%20265%2065.0%20303.0Q38%20341%2038%20393Q38%20459%2080.0%20503.0Q122%20547%20197.5%20568.5Q273%20590%20373%20590Q472%20590%20549.0%20565.0Q626%20540%20672.5%20495.0Q719%20450%20727%20390H494Q489%20408%20473.0%20421.5Q457%20435%20430.0%20443.0Q403%20451%20363%20451Q312%20451%20287.0%20441.5Q262%20432%20262%20414Q262%20398%20277.5%20390.0Q293%20382%20336%20379L466%20370Q569%20364%20629.0%20341.5Q689%20319%20714.0%20281.5Q739%20244%20739%20191Z%22%2F%3E%3Cpath%20transform%3D%22translate%281306%200%29%22%20d%3D%22M52%20770H281V0H52ZM486%20590Q569%20590%20627.5%20557.0Q686%20524%20717.0%20463.5Q748%20403%20748%20322V0H519V289Q519%20345%20489.5%20375.0Q460%20405%20405%20405Q367%20405%20339.0%20389.0Q311%20373%20296.0%20344.0Q281%20315%20281%20274L212%20310Q225%20403%20264.5%20465.0Q304%20527%20361.0%20558.5Q418%20590%20486%20590Z%22%2F%3E%3Cpath%20transform%3D%22translate%282059%200%29%22%20d%3D%22M157%20-11Q122%20-11%2093.0%205.5Q64%2022%2047.5%2051.0Q31%2080%2031%20115Q31%20151%2047.5%20179.5Q64%20208%2093.0%20224.5Q122%20241%20157%20241Q193%20241%20221.5%20224.5Q250%20208%20266.5%20179.5Q283%20151%20283%20115Q283%2080%20266.5%2051.0Q250%2022%20221.5%205.5Q193%20-11%20157%20-11Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
 <meta name="description" content="洪采姍 Tsai Shan Hung，自由文字編輯。深耕媒體內容產業逾八年，專注人物專訪、品牌敘事與文字編輯。合作媒體包括 Shopping Design、VOGUE Taiwan、Roomie、VERSE 等。">
@@ -38,6 +38,12 @@
   --lime: #d3ec4b;
   --cursorblue: #9ad3e7; /* 游標在首頁 difference 混色後的實際顏色 */
   --goose: #f3dd93; /* 鵝黃 */
+  /* 首頁底色：把「陶土紅＋52% 暗層」的合成結果直接寫成實色，
+     iOS 取狀態列顏色時只讀 background-color，才不會取到亮陶土紅 */
+  --terra-dark: #421a0f;
+  --halftone-dark:
+    radial-gradient(rgb(96,56,40) 1.1px, transparent 1.1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.5 0 0 0 0 0.32 0 0 0 0 0.2 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='90' height='90' filter='url(%23n)'/%3E%3C/svg%3E");
   --ink2: #14100e;
   --line: rgba(22,19,15,0.22);
   --halftone:
@@ -53,16 +59,23 @@ body {
   overflow-x: hidden; opacity: 0; transition: opacity 0.5s ease, background 0.6s ease;
 }
 body.ready { opacity: 1; }
-body[data-page="home"] { background-color: #642c18; }
+body[data-page="home"] { background-color: var(--terra-dark); }
 /* 固定襯底層：無論捲到哪裡都鋪滿同一張網底，不會露出純色 */
+/* 首頁像素色塊動畫層（在網點層之下） */
+#home-fx {
+  position: fixed; inset: 0; z-index: -2;
+  display: none; width: 100%; height: 100%;
+  image-rendering: pixelated; image-rendering: crisp-edges;
+}
+body[data-page="home"] #home-fx { display: block; }
 body::before {
   content: '';
   position: fixed; inset: 0; z-index: -1;
   display: none;
-  background-color: var(--terra);
-  background-image: var(--darken), var(--halftone);
-  background-size: cover, 9px 9px, 90px 90px;
-  background-blend-mode: normal, normal, soft-light;
+  background-color: transparent;
+  background-image: var(--halftone-dark);
+  background-size: 9px 9px, 90px 90px;
+  background-blend-mode: normal, soft-light;
 }
 body[data-page="home"]::before { display: block; }
 body[data-page="works"] { background: var(--paper); }
@@ -84,11 +97,10 @@ ol, ul { margin: 0; padding: 0; list-style: none; }
   background: var(--paper);
   transition: background 0.6s ease, color 0.6s ease;
 }
+/* 首頁頁首透明：讓背景色塊與網點連續不斷；body 底色本身已是深色，
+   iOS 取狀態列顏色時仍會取到深色 */
 body[data-page="home"] .head {
-  background-color: var(--terra);
-  background-image: var(--darken), var(--halftone);
-  background-size: cover, 9px 9px, 90px 90px;
-  background-blend-mode: normal, normal, soft-light;
+  background: transparent;
   color: var(--cream);
 }
 body[data-page="about"] .head { background: var(--lime); }
@@ -162,7 +174,7 @@ body[data-page="contact"] .head { background: var(--ink2); color: var(--cream); 
 .home-label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; line-height: 2; opacity: 0.75; }
 .home-desc { font-size: 0.82rem; line-height: 2.3; letter-spacing: 0.05em; opacity: 0.92; }
 .home-statement { font-size: clamp(3.4rem, 12vw, 12.5rem); }
-.home-statement em { font-style: normal; color: var(--goose); }
+.home-statement em { font-style: normal; color: var(--lime); }
 .home-zh {
   font-family: 'Noto Sans TC', sans-serif; font-weight: 500;
   font-size: clamp(1.1rem, 2.4vw, 2rem); letter-spacing: 0.42em;
@@ -519,6 +531,96 @@ document.body.classList.add('ready');
   addEventListener('mouseout', e => { if (e.target.closest(hot)) document.body.classList.remove('cur-hot'); });
 })();
 
+// ── 首頁背景：像素化的有機色塊與擴散圓環（低解析度放大成方塊邊緣）──
+(function () {
+  const cv = document.createElement('canvas');
+  cv.id = 'home-fx';
+  document.body.prepend(cv);
+  const ctx = cv.getContext('2d', { alpha: false });
+  const CELL = 9;                       // 與網點同格距
+  // blobs：小色塊漂浮；ripples：自中心擴散的圓環。兩者可單獨或同時開啟
+  const FX = window.__fx = { blobs: true, ripples: false, count: 8, size: 0.095, rings: 3, period: 9000, thick: 2.2, base: [66, 26, 15], blob: [105, 44, 27] };
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w = 0, h = 0, img = null, balls = [], t0 = performance.now();
+
+  function seed() {
+    balls = [];
+    const R = Math.min(w, h) * FX.size;
+    for (let i = 0; i < FX.count; i++) {
+      balls.push({
+        x: w * (0.05 + 0.9 * ((i * 0.3819 + 0.17) % 1)),
+        y: h * (0.05 + 0.9 * ((i * 0.6180 + 0.29) % 1)),
+        r: R * (0.65 + 0.7 * ((i * 0.2971) % 1)),
+        vx: (i % 2 ? 1 : -1) * (0.10 + 0.09 * ((i * 0.53) % 1)),
+        vy: (i % 3 ? -1 : 1) * (0.08 + 0.10 * ((i * 0.41) % 1)),
+      });
+    }
+  }
+  function resize() {
+    w = Math.max(2, Math.ceil(innerWidth / CELL));
+    h = Math.max(2, Math.ceil(innerHeight / CELL));
+    cv.width = w; cv.height = h;
+    img = ctx.createImageData(w, h);
+    seed();
+  }
+  resize();
+  addEventListener('resize', resize);
+  window.__fxReseed = seed;
+
+  let last = 0;
+  function draw(t) {
+    requestAnimationFrame(draw);
+    if (document.body.dataset.page !== 'home') return;   // 只在首頁運算
+    if (t - last < 55) return;                            // 約 18fps
+    const dt = Math.min(3, (t - last) / 16.7); last = t;
+
+    if (FX.blobs && !reduced) {
+      for (const b of balls) {
+        b.x += b.vx * dt * 0.35; b.y += b.vy * dt * 0.35;
+        if (b.x < -b.r) b.x = w + b.r; else if (b.x > w + b.r) b.x = -b.r;
+        if (b.y < -b.r) b.y = h + b.r; else if (b.y > h + b.r) b.y = -b.r;
+      }
+    }
+    // 擴散圓環：自中心一圈圈向外推，到邊緣後重新開始
+    const cx = w / 2, cy = h * 0.46, maxR = Math.hypot(w, h) * 0.62;
+    const phase = reduced ? 0.35 : ((t - t0) % FX.period) / FX.period;
+    const ringR = [];
+    if (FX.ripples) {
+      for (let k = 0; k < FX.rings; k++) {
+        const p = (phase + k / FX.rings) % 1;
+        ringR.push({ r: p * maxR, fade: 1 - p });     // 越外圈越細
+      }
+    }
+
+    const d = img.data;
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        let on = false;
+        if (FX.blobs) {
+          let f = 0;
+          for (const b of balls) {
+            const dx = x - b.x, dy = y - b.y;
+            f += (b.r * b.r) / (dx * dx + dy * dy + 1);
+            if (f > 1) break;
+          }
+          on = f > 1;
+        }
+        if (!on && ringR.length) {
+          const dr = Math.hypot(x - cx, y - cy);
+          for (const R of ringR) {
+            if (Math.abs(dr - R.r) < FX.thick * (0.35 + R.fade)) { on = true; break; }
+          }
+        }
+        const c = on ? FX.blob : FX.base;
+        const i = (y * w + x) * 4;
+        d[i] = c[0]; d[i + 1] = c[1]; d[i + 2] = c[2]; d[i + 3] = 255;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+  }
+  requestAnimationFrame(draw);
+})();
+
 // ── 分頁式導覽：切換 .page、同步 hash 與 nav 狀態 ──
 let revealObserver;
 const PAGES = ['home', 'works', 'about', 'contact'];
@@ -527,7 +629,7 @@ function showPage(name, push) {
   PAGES.forEach(p => { const el = document.getElementById('page-' + p); if (el) el.classList.toggle('on', p === name); });
   document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === name));
   document.body.dataset.page = name;
-  const tc = { home: '#642c18', works: '#ffffff', about: '#d3ec4b', contact: '#14100e' }[name];
+  const tc = { home: '#421a0f', works: '#ffffff', about: '#d3ec4b', contact: '#14100e' }[name];
   const tm = document.querySelector('meta[name="theme-color"]');
   if (tm && tc) tm.setAttribute('content', tc);
   if (push && location.hash !== '#' + name) history.pushState(null, '', '#' + name);
