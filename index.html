@@ -10,7 +10,6 @@
   gtag('config', 'G-KM40FEPEG5');
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#421a0f">
 <title>洪采姍 Tsai Shan Hung｜自由文字編輯</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cstyle%3Eg%7Bfill%3A%23421a0f%7D%40media%28prefers-color-scheme%3Adark%29%7Bg%7Bfill%3A%23f5f1e8%7D%7D%3C%2Fstyle%3E%3Cg%20transform%3D%22translate%282%2C47.6%29%20scale%280.04800%2C-0.04800%29%22%3E%3Cpath%20transform%3D%22translate%280%2C0%29%22%20d%3D%22M147%20-9Q112%20-9%2089.5%2015.5Q67%2040%2067%2096V470Q67%20482%2055%20482H26Q10%20482%2010%20494Q10%20502%2019%20508Q52%20531%2072.0%20557.5Q92%20584%20107%20630Q114%20651%20124%20651Q135%20651%20135%20635V524Q135%20510%20149%20510H214Q230%20510%20230%20496Q230%20482%20214%20482H149Q135%20482%20135%20468V95Q135%2073%20142.0%2060.5Q149%2048%20168%2048Q189%2048%20202.5%2069.0Q216%2090%20220%20137Q222%20151%20233%20151Q245%20151%20245%20136Q242%2059%20213.5%2025.0Q185%20-9%20147%20-9Z%22%2F%3E%3Cpath%20transform%3D%22translate%28259%2C0%29%22%20d%3D%22M131%20-9Q108%20-9%2082.0%20-3.5Q56%202%2040%2010Q31%2015%2031%2027L28%20139Q28%20156%2041%20156Q52%20156%2056%20140Q73%2069%2097.5%2043.0Q122%2017%20157%2017Q186%2017%20205.0%2039.5Q224%2062%20224%20102Q224%20142%20202.0%20173.0Q180%20204%20128%20241Q76%20276%2052.0%20311.5Q28%20347%2028%20389Q28%20446%2068.0%20481.0Q108%20516%20174%20516Q194%20516%20213.0%20511.5Q232%20507%20247%20497Q256%20491%20256%20481L258%20371Q258%20356%20246%20356Q239%20356%20236.0%20360.5Q233%20365%20231%20372Q211%20437%20191.0%20462.5Q171%20488%20142%20488Q116%20488%2099.0%20470.0Q82%20452%2082%20425Q82%20390%20103.0%20364.0Q124%20338%20179%20300Q229%20264%20254.5%20222.5Q280%20181%20280%20132Q280%2068%20239.0%2029.5Q198%20-9%20131%20-9Z%22%2F%3E%3Cpath%20transform%3D%22translate%28567%2C0%29%22%20d%3D%22M27%200Q15%200%2015%2011Q15%2021%2026%2023L40%2025Q61%2028%2067.5%2037.0Q74%2046%2074%2067V640Q74%20658%2068.5%20664.5Q63%20671%2049%20673L28%20676Q17%20678%2017%20688Q17%20698%2028%20700Q56%20706%2075.0%20714.0Q94%20722%20107%20730Q123%20740%20131%20740Q142%20740%20142%20724V459Q142%20450%20148.0%20448.5Q154%20447%20163%20455Q201%20490%20230.0%20503.0Q259%20516%20291%20516Q338%20516%20365.0%20484.5Q392%20453%20392%20392V67Q392%2046%20398.5%2037.5Q405%2029%20426%2026L448%2023Q459%2021%20459%2011Q459%200%20447%200H279Q265%200%20265%2011Q265%2021%20276%2023L290%2025Q311%2028%20317.5%2037.0Q324%2046%20324%2067V381Q324%20430%20306.0%20450.0Q288%20470%20255%20470Q223%20470%20197.5%20451.5Q172%20433%20157.0%20402.5Q142%20372%20142%20335V67Q142%2046%20148.5%2037.0Q155%2028%20176%2026L203%2023Q214%2021%20214%2011Q214%200%20202%200Z%22%2F%3E%3Cpath%20transform%3D%22translate%281037%2C0%29%22%20d%3D%22M107%20-9Q85%20-9%2069.5%205.5Q54%2020%2054%2044Q54%2067%2069.5%2081.5Q85%2096%20107%2096Q127%2096%20143.0%2081.5Q159%2067%20159%2044Q159%2020%20143.0%205.5Q127%20-9%20107%20-9Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
 <meta name="description" content="洪采姍 Tsai Shan Hung，自由文字編輯。深耕媒體內容產業逾八年，專注人物專訪、品牌敘事與文字編輯。合作媒體包括 Shopping Design、VOGUE Taiwan、Roomie、VERSE 等。">
@@ -76,7 +75,8 @@ body[data-page="home"] { background-color: var(--terra-dark); }
 body[data-page="home"] #home-fx { display: block; }
 body::before {
   content: '';
-  position: fixed; inset: 0; z-index: -1;
+  /* 上下各多延伸 120px：iOS 狀態列與底部工具列的毛玻璃取樣範圍也有網點 */
+  position: fixed; top: -120px; bottom: -120px; left: 0; right: 0; z-index: -1;
   display: none;
   background-color: transparent;
   background-image: var(--halftone-dark);
@@ -556,94 +556,118 @@ document.body.classList.add('ready');
   addEventListener('mouseout', e => { if (e.target.closest(hot)) document.body.classList.remove('cur-hot'); });
 })();
 
-// ── 首頁背景：像素化的有機色塊與擴散圓環（低解析度放大成方塊邊緣）──
+// ── 首頁背景：一條隨性的手寫線，從左緣往右畫過頁面中段，畫完就留著 ──
 (function () {
   const cv = document.createElement('canvas');
   cv.id = 'home-fx';
   document.body.prepend(cv);
   const ctx = cv.getContext('2d', { alpha: false });
-  const CELL = 9;                       // 與網點同格距
-  // blobs：小色塊漂浮；ripples：自中心擴散的圓環。兩者可單獨或同時開啟
-  const FX = window.__fx = { blobs: true, ripples: false, count: 8, size: 0.095, rings: 3, period: 9000, thick: 2.2, base: [66, 26, 15], blob: [105, 44, 27] };
+  const BG = '#421a0f';
+  const INK = 'rgba(245,241,232,0.55)';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let w = 0, h = 0, img = null, balls = [], t0 = performance.now();
+  const DURATION = 1100;                 // 快速俐落地一筆劃過
+  const DELAY = 500;
+  let W = 0, H = 0, dpr = 1, pts = [], drawnTo = 0, t0 = 0;
 
-  function seed() {
-    balls = [];
-    const R = Math.min(w, h) * FX.size;
-    for (let i = 0; i < FX.count; i++) {
-      balls.push({
-        x: w * (0.05 + 0.9 * ((i * 0.3819 + 0.17) % 1)),
-        y: h * (0.05 + 0.9 * ((i * 0.6180 + 0.29) % 1)),
-        r: R * (0.65 + 0.7 * ((i * 0.2971) % 1)),
-        vx: (i % 2 ? 1 : -1) * (0.10 + 0.09 * ((i * 0.53) % 1)),
-        vy: (i % 3 ? -1 : 1) * (0.08 + 0.10 * ((i * 0.41) % 1)),
-      });
+  // 平滑雜訊：三組不同波長的正弦疊加，相位隨機 → 每次載入的線都不一樣
+  function makeNoise() {
+    const ph = [Math.random() * 7, Math.random() * 7, Math.random() * 7];
+    const wl = [520 + Math.random() * 260, 210 + Math.random() * 120, 90 + Math.random() * 50];
+    const M = Math.min(W, H);   // 直式螢幕用寬度基準，擺幅才不會過大
+    const am = [M * (0.045 + Math.random() * 0.03), M * 0.022, M * 0.008];
+    return x => am[0] * Math.sin(x / wl[0] * 6.283 + ph[0])
+              + am[1] * Math.sin(x / wl[1] * 6.283 + ph[1])
+              + am[2] * Math.sin(x / wl[2] * 6.283 + ph[2]);
+  }
+
+  function buildPath() {
+    pts = [];
+    // 直式螢幕時線走名字後方，避免壓在說明文字上
+    const yc = H * ((H > W ? 0.41 : 0.5) + (Math.random() - 0.5) * 0.04);
+    const n = makeNoise();
+    // 避開中文名：經過「洪采姍」時平滑下潛到名字下緣，像替它畫一條底線
+    const zhEl = document.querySelector('.home-zh');
+    const zr = zhEl ? zhEl.getBoundingClientRect() : null;
+    const RAMP = 80, PAD = 14;
+    const dodge = (x, y) => {
+      if (!zr) return y;
+      const L = zr.left - RAMP, R = zr.right + RAMP;
+      if (x <= L || x >= R) return y;
+      const floor = zr.bottom + PAD;
+      if (y >= floor) return y;
+      let t = Math.min(1, Math.min((x - L) / RAMP, (R - x) / RAMP));
+      t = t * t * (3 - 2 * t);
+      return y + (floor - y) * t;
+    };
+    const x0 = W * (0.13 + Math.random() * 0.04);     // 起筆、收筆都在中段兩側
+    const x1 = W * (0.83 + Math.random() * 0.04);
+    let loopX = x0 + (x1 - x0) * (0.26 + Math.random() * 0.22); // 草寫小圈的位置
+    if (zr && loopX + 74 > zr.left - RAMP && loopX < zr.right + RAMP) loopX = zr.left - RAMP - 94;
+    const loopL = 74, loopB = loopL * 0.38, loopA = 20 + Math.random() * 10;
+    const flickX = x0 + (x1 - x0) * (0.66 + Math.random() * 0.1); // 尾段小抖筆
+    let x = x0;
+    while (x <= x1) {
+      if (x >= loopX && x < loopX + loopL) {
+        // 草寫圈：前進中帶回勾，切線連續
+        const t = (x - loopX) / loopL;
+        for (let k = 0; k <= 26; k++) {
+          const u = t + k / 26 * (1 - t); // 只在首次進入時展開整個圈
+          const lx = loopX + loopL * u - loopB * Math.sin(6.283 * u);
+          const ly = yc + n(loopX + loopL * u) - loopA * (1 - Math.cos(6.283 * u)) / 2;
+          pts.push({ x: lx, y: dodge(lx, ly) });
+        }
+        x = loopX + loopL + 6;
+        continue;
+      }
+      let y = yc + n(x);
+      if (x > flickX && x < flickX + 26) y += (x - flickX < 13 ? -1 : 1) * 5; // 抖一下
+      pts.push({ x, y: dodge(x, y) });
+      x += 6;
     }
   }
-  function resize() {
-    w = Math.max(2, Math.ceil(innerWidth / CELL));
-    h = Math.max(2, Math.ceil(innerHeight / CELL));
-    cv.width = w; cv.height = h;
-    img = ctx.createImageData(w, h);
-    seed();
+
+  function paintBase() { ctx.fillStyle = BG; ctx.fillRect(0, 0, cv.width, cv.height); }
+
+  // 每幀整條重畫（單一路徑），透明度才不會在接點互疊出斑駁
+  function strokeTo(idx) {
+    paintBase();
+    if (idx < 1) return;
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.strokeStyle = INK; ctx.lineWidth = 3.4 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x * dpr, pts[0].y * dpr);
+    for (let i = 1; i <= idx && i < pts.length; i++) ctx.lineTo(pts[i].x * dpr, pts[i].y * dpr);
+    ctx.stroke();
+    drawnTo = idx;
   }
+
+  const ease = t => 1 - Math.pow(1 - t, 3);   // 快出筆、緩收尾
+
+  function resize() {
+    W = innerWidth; H = innerHeight;
+    dpr = Math.min(2, devicePixelRatio || 1);
+    cv.width = Math.ceil(W * dpr); cv.height = Math.ceil(H * dpr);
+    buildPath();
+    // 改變視窗大小時不重播動畫：直接畫到目前進度
+    if (reduced || done()) strokeTo(pts.length - 1);
+    else strokeTo(Math.floor(progress() * (pts.length - 1)));
+  }
+  function progress() {
+    if (!t0) return 0;
+    return Math.min(1, ease(Math.max(0, performance.now() - t0 - DELAY) / DURATION));
+  }
+  function done() { return t0 && performance.now() - t0 - DELAY >= DURATION; }
+
   resize();
   addEventListener('resize', resize);
-  window.__fxReseed = seed;
+  window.__fxReseed = () => { t0 = performance.now(); resize(); };
 
-  let last = 0;
-  function draw(t) {
-    requestAnimationFrame(draw);
-    if (document.body.dataset.page !== 'home') return;   // 只在首頁運算
-    if (t - last < 55) return;                            // 約 18fps
-    const dt = Math.min(3, (t - last) / 16.7); last = t;
-
-    if (FX.blobs && !reduced) {
-      for (const b of balls) {
-        b.x += b.vx * dt * 0.35; b.y += b.vy * dt * 0.35;
-        if (b.x < -b.r) b.x = w + b.r; else if (b.x > w + b.r) b.x = -b.r;
-        if (b.y < -b.r) b.y = h + b.r; else if (b.y > h + b.r) b.y = -b.r;
-      }
-    }
-    // 擴散圓環：自中心一圈圈向外推，到邊緣後重新開始
-    const cx = w / 2, cy = h * 0.46, maxR = Math.hypot(w, h) * 0.62;
-    const phase = reduced ? 0.35 : ((t - t0) % FX.period) / FX.period;
-    const ringR = [];
-    if (FX.ripples) {
-      for (let k = 0; k < FX.rings; k++) {
-        const p = (phase + k / FX.rings) % 1;
-        ringR.push({ r: p * maxR, fade: 1 - p });     // 越外圈越細
-      }
-    }
-
-    const d = img.data;
-    for (let y = 0; y < h; y++) {
-      for (let x = 0; x < w; x++) {
-        let on = false;
-        if (FX.blobs) {
-          let f = 0;
-          for (const b of balls) {
-            const dx = x - b.x, dy = y - b.y;
-            f += (b.r * b.r) / (dx * dx + dy * dy + 1);
-            if (f > 1) break;
-          }
-          on = f > 1;
-        }
-        if (!on && ringR.length) {
-          const dr = Math.hypot(x - cx, y - cy);
-          for (const R of ringR) {
-            if (Math.abs(dr - R.r) < FX.thick * (0.35 + R.fade)) { on = true; break; }
-          }
-        }
-        const c = on ? FX.blob : FX.base;
-        const i = (y * w + x) * 4;
-        d[i] = c[0]; d[i + 1] = c[1]; d[i + 2] = c[2]; d[i + 3] = 255;
-      }
-    }
-    ctx.putImageData(img, 0, 0);
-  }
-  requestAnimationFrame(draw);
+  t0 = performance.now();
+  (function tick() {
+    if (!done()) requestAnimationFrame(tick);
+    if (document.body.dataset.page !== 'home') return;
+    strokeTo(Math.floor(progress() * (pts.length - 1)));
+  })();
 })();
 
 // ── 分頁式導覽：切換 .page、同步 hash 與 nav 狀態 ──
@@ -654,9 +678,7 @@ function showPage(name, push) {
   PAGES.forEach(p => { const el = document.getElementById('page-' + p); if (el) el.classList.toggle('on', p === name); });
   document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === name));
   document.body.dataset.page = name;
-  const tc = { home: '#421a0f', works: '#ffffff', about: '#d3ec4b', contact: '#14100e' }[name];
-  const tm = document.querySelector('meta[name="theme-color"]');
-  if (tm && tc) tm.setAttribute('content', tc);
+  // 狀態列／彈性捲動區的顏色交給 body 背景傳遞（html 不能設底色，否則會蓋住背景畫布）
   if (push && location.hash !== '#' + name) history.pushState(null, '', '#' + name);
   // 直接跳到頂端：smooth 會讓畫面「一路捲上去」，切換時會先看到新分頁的中段
   const root = document.documentElement;
