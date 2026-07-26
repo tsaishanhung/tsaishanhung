@@ -571,7 +571,7 @@ document.body.classList.add('ready');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const DURATION = 1100;                 // 快速俐落地一筆劃過
   const DELAY = 500;
-  let W = 0, H = 0, dpr = 1, pts = [], drawnTo = 0, t0 = 0;
+  let W = 0, H = 0, dpr = 1, pts = [], drawnTo = 0, t0 = 0, lastW = 0;
 
   // 平滑雜訊：三組不同波長的正弦疊加，相位隨機 → 每次載入的線都不一樣
   function makeNoise() {
@@ -649,6 +649,10 @@ document.body.classList.add('ready');
   const ease = t => 1 - Math.pow(1 - t, 3);   // 快出筆、緩收尾
 
   function resize() {
+    // iOS 捲動時網址列縮合會觸發高度變化的 resize，若重建線就會「跟著動」；
+    // 只有寬度改變（如轉向）才重新生成
+    if (innerWidth === lastW && pts.length) return;
+    lastW = innerWidth;
     W = innerWidth; H = innerHeight;
     dpr = Math.min(2, devicePixelRatio || 1);
     cv.width = Math.ceil(W * dpr); cv.height = Math.ceil(H * dpr);
