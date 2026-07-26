@@ -69,8 +69,8 @@ body[data-page="home"] { background-color: var(--terra-dark); }
 /* 固定襯底層：無論捲到哪裡都鋪滿同一張網底，不會露出純色 */
 /* 首頁像素色塊動畫層（在網點層之下） */
 #home-fx {
-  position: fixed; inset: 0; z-index: -2;
-  display: none; width: 100%; height: 100%;
+  position: absolute; top: 0; left: 0; z-index: -2;
+  display: none; width: 100%; height: 100vh;
   image-rendering: pixelated; image-rendering: crisp-edges;
 }
 body[data-page="home"] #home-fx { display: block; }
@@ -591,7 +591,8 @@ document.body.classList.add('ready');
     const n = makeNoise();
     // 避開中文名：經過「洪采姍」時平滑下潛到名字下緣，像替它畫一條底線
     const zhEl = document.querySelector('.home-zh');
-    const zr = zhEl ? zhEl.getBoundingClientRect() : null;
+    let zr = zhEl ? zhEl.getBoundingClientRect() : null;
+    if (zr) zr = { left: zr.left, right: zr.right, bottom: zr.bottom + scrollY };
     const RAMP = 80, PAD = 14;
     const dodge = (x, y) => {
       if (!zr) return y;
